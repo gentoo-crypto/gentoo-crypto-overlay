@@ -5,6 +5,7 @@ EAPI=6
 
 inherit git-r3
 inherit eutils
+inherit xdg-utils
 
 DESCRIPTION="Monero Gui: the secure, private, untraceable cryptocurrency"
 HOMEPAGE="https://getmonero.org/"
