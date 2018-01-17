@@ -9,7 +9,7 @@ inherit eutils
 DESCRIPTION="Monero Gui: the secure, private, untraceable cryptocurrency"
 HOMEPAGE="https://getmonero.org/"
 
-EGIT_REPO_URI="git://github.com/monero-project/monero-gui.git"
+EGIT_REPO_URI="https://github.com/monero-project/monero-gui.git"
 EGIT_COMMIT="refs/tags/v0.11.1.0"
 KEYWORDS="~amd64 ~x86"
 
