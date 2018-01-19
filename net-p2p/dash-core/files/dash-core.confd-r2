@@ -1,0 +1,24 @@
+# /etc/conf.d/dash-core: config file for /etc/init.d/dash-core
+
+# Config file location (-conf option)
+#DASHD_CONFIGFILE="/etc/dash/dash.conf"
+
+# Where to write dashd data (-datadir option)
+# Be mindful that the blockchain is large
+#DASHD_DATADIR="/var/lib/dash"
+
+# Additional options (avoid -conf and -datadir, use flags above)
+DASHD_OPTS="-disablewallet"
+
+# User to own dashd process
+#DASHD_USER="dash"
+
+# Nice value to run dashd under
+DASHD_NICE=19
+
+# The timeout in seconds OpenRC will wait for dashd to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+DASHD_SIGTERM_TIMEOUT=60

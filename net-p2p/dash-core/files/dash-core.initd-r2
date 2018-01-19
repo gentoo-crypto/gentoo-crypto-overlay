@@ -1,0 +1,52 @@
+#!/sbin/openrc-run
+# Copyright 1999-2017 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+: ${DASHD_USER:="dash"}
+: ${DASHD_DATADIR:="/var/lib/dash"}
+: ${DASHD_CONFIGFILE:="/etc/dash/dash.conf"}
+: ${DASHD_NICE:=0}
+: ${DASHD_SIGTERM_TIMEOUT:=60}
+
+name="Dash Core daemon"
+description="Dash cryptocurrency P2P network daemon"
+pidfile="/run/${SVCNAME}/dashd.pid"
+command="/usr/bin/dashd"
+command_args="-pid=${pidfile} \
+	-conf=${DASHD_CONFIGFILE} \
+	-datadir=${DASHD_DATADIR} \
+	-daemon ${DASHD_OPTS}"
+command_user="${DASHD_USER}"
+retry="${DASHD_SIGTERM_TIMEOUT}"
+required_files="${DASHD_CONFIGFILE}"
+start_stop_daemon_args="-N ${DASHD_NICE} -w 2000"
+
+depend() {
+	need localmount net
+}
+
+start_pre() {
+	checkpath -d -m 0750 -o ${DASHD_USER} "${pidfile%/*}"
+	checkpath -f -m 0600 -o ${DASHD_USER} "${DASHD_CONFIGFILE}"
+
+	if [ "${RC_CMD}" != "restart" ]; then
+		checkconfig || return 1
+	fi
+}
+
+checkconfig() {
+	if ! grep -qs '^rpcpassword=' "${DASHD_CONFIGFILE}"; then
+		eerror
+		eerror "ERROR: You must set a secure rpcpassword to run dashd."
+		eerror "The setting must appear in ${DASHD_CONFIGFILE}"
+		eerror
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following"
+		eerror "command from the shell:"
+		eerror
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror
+		return 1
+	fi
+}

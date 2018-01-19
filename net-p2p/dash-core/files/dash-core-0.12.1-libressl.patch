@@ -1,0 +1,36 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -777,6 +777,13 @@
+ 
+ BITCOIN_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
+ 
++save_CXXFLAGS="${CXXFLAGS}"
++CXXFLAGS="${CXXFLAGS} ${CRYPTO_CFLAGS} ${SSL_CFLAGS}"
++AC_CHECK_DECLS([EVP_MD_CTX_new],,,[AC_INCLUDES_DEFAULT
++#include <openssl/x509_vfy.h>
++])
++CXXFLAGS="${save_CXXFLAGS}"
++
+ AC_MSG_CHECKING([whether to build dashd])
+ AM_CONDITIONAL([BUILD_BITCOIND], [test x$build_bitcoind = xyes])
+ AC_MSG_RESULT($build_bitcoind)
+--- a/src/qt/paymentrequestplus.cpp
++++ b/src/qt/paymentrequestplus.cpp
+@@ -159,7 +159,7 @@
+         std::string data_to_verify;                     // Everything but the signature
+         rcopy.SerializeToString(&data_to_verify);
+ 
+-#if OPENSSL_VERSION_NUMBER >= 0x10100000L
++#if HAVE_DECL_EVP_MD_CTX_NEW
+         EVP_MD_CTX *ctx = EVP_MD_CTX_new();
+         if (!ctx) throw SSLVerifyError("Error allocating OpenSSL context.");
+ #else
+@@ -177,7 +177,7 @@
+             throw SSLVerifyError("Bad signature, invalid payment request.");
+         }
+ 
+-#if OPENSSL_VERSION_NUMBER >= 0x10100000L
++#if HAVE_DECL_EVP_MD_CTX_NEW
+         EVP_MD_CTX_free(ctx);
+ #endif
+ 
