@@ -5,7 +5,7 @@ EAPI=6
 
 DB_VER="4.8"
 
-LANGS="en en_GB"
+LANGS="af en en_GB"
 
 inherit autotools db-use eutils fdo-mime gnome2-utils kde5-functions qmake-utils
 
@@ -20,7 +20,7 @@ SRC_URI="https://github.com/${MyPN}-project/${MyPN}/archive/v${MyPV}.tar.gz -> $
 LICENSE="MIT ISC GPL-3 LGPL-2.1 public-domain || ( CC-BY-SA-3.0 LGPL-2.1 )"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="dbus kde +qrcode qt5 upnp zmq linguas_en linguas_en_GB"
+IUSE="dbus kde +qrcode qt5 upnp zmq linguas_af linguas_en linguas_en_GB"
 
 RDEPEND="
 	dev-libs/boost:=[threads(+)]
