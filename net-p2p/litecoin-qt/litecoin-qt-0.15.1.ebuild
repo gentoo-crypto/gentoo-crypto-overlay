@@ -5,7 +5,7 @@ EAPI=6
 
 DB_VER="4.8"
 
-LANGS="af en en_GB"
+LANGS="af af_ZA ar be_BY bg bg_BG ca ca@valencia ca_ES cs cy da de el el_GR en en_GB eo es es_AR es_CL es_CO es_DO es_ES es_MX es_UY es_VE et eu_ES et_EE fa fa_IR fi fr fr_CA fr_FR gl he hi_IN hr hu id_ID it it_IT ja ka kk_KZ ko_KR ku_IQ ky la lt lv_LV mk_MK mn ms_MY nb ne nl pam pl pt_BR pt_PT ro ro_RO ru ru_RU sk sl_SI sq sr sr@latin sv ta th_TH tr tr_TR uk ur_PK uz@Cyrl vi vi_VN zh zh_CN zh_HK zh_TW"
 
 inherit autotools db-use eutils fdo-mime gnome2-utils kde5-functions qmake-utils
 
@@ -20,7 +20,7 @@ SRC_URI="https://github.com/${MyPN}-project/${MyPN}/archive/v${MyPV}.tar.gz -> $
 LICENSE="MIT ISC GPL-3 LGPL-2.1 public-domain || ( CC-BY-SA-3.0 LGPL-2.1 )"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="dbus kde +qrcode qt5 upnp zmq linguas_af linguas_en linguas_en_GB"
+IUSE="dbus kde +qrcode qt5 upnp zmq linguas_af linguas_af_ZA linguas_ar linguas_be_BY linguas_bg linguas_bg_BG linguas_ca linguas_ca@valencia linguas_ca_ES linguas_cs linguas_cy linguas_da linguas_de linguas_el linguas_el_GR linguas_en linguas_en_GB linguas_eo linguas_es linguas_es_AR linguas_es_CL linguas_es_CO linguas_es_DO linguas_es_ES linguas_es_MX linguas_es_UY linguas_es_VE linguas_et linguas_eu_ES linguas_et_EE linguas_fa linguas_fa_IR linguas_fi linguas_fr linguas_fr_CA linguas_fr_FR linguas_gl linguas_he linguas_hi_IN linguas_hr linguas_hu linguas_id_ID linguas_it linguas_it_IT linguas_ja linguas_ka linguas_kk_KZ linguas_ko_KR linguas_ku_IQ linguas_ky linguas_la linguas_lt linguas_lv_LV linguas_mk_MK linguas_mn linguas_ms_MY linguas_nb linguas_ne linguas_nl linguas_pam linguas_pl linguas_pt_BR linguas_pt_PT linguas_ro linguas_ro_RO linguas_ru linguas_ru_RU linguas_sk linguas_sl_SI linguas_sq linguas_sr linguas_sr@latin linguas_sv linguas_ta linguas_th_TH linguas_tr linguas_tr_TR linguas_uk linguas_ur_PK linguas_uz@Cyrl linguas_vi linguas_vi_VN linguas_zh linguas_zh_CN linguas_zh_HK linguas_zh_TW"
 
 RDEPEND="
 	dev-libs/boost:=[threads(+)]
