@@ -5,7 +5,7 @@ EAPI=6
 
 DB_VER="4.8"
 
-LANGS="af af_ZA ar be_BY bg bg_BG ca ca@valencia ca_ES cs cy da de el el_GR en en_GB eo es es_AR es_CL es_CO es_DO es_ES es_MX es_UY es_VE et eu_ES et_EE fa fa_IR fi fr fr_CA fr_FR gl he hi_IN hr hu id_ID it it_IT ja ka kk_KZ ko_KR ku_IQ ky la lt lv_LV mk_MK mn ms_MY nb ne nl pam pl pt_BR pt_PT ro ro_RO ru ru_RU sk sl_SI sq sr sr@latin sv ta th_TH tr tr_TR uk ur_PK uz@Cyrl vi vi_VN zh zh_CN zh_HK zh_TW"
+LANGS="en en_GB"
 
 inherit autotools db-use eutils fdo-mime gnome2-utils kde5-functions qmake-utils
 
@@ -20,7 +20,7 @@ SRC_URI="https://github.com/${MyPN}-project/${MyPN}/archive/v${MyPV}.tar.gz -> $
 LICENSE="MIT ISC GPL-3 LGPL-2.1 public-domain || ( CC-BY-SA-3.0 LGPL-2.1 )"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="dbus kde +qrcode qt5 upnp zmq"
+IUSE="dbus kde +qrcode qt5 upnp zmq linguas_en linguas_en_GB"
 
 RDEPEND="
 	dev-libs/boost:=[threads(+)]
