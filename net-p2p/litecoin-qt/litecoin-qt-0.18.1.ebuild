@@ -52,7 +52,6 @@ RDEPEND="
 	zmq? ( net-libs/zeromq )
 "
 DEPEND="${RDEPEND}
-	qt5? ( dev-qt/linguist-tools:5 )
 	>=app-shells/bash-4.1
 	dev-libs/libevent
 "
@@ -62,9 +61,6 @@ DOCS="doc/README.md"
 S="${WORKDIR}/${MyP}"
 
 src_prepare() {
-#	epatch "${FILESDIR}"/litecoind-0.13.2-memenv_h.patch
-#	epatch "${FILESDIR}"/0.9.0-sys_leveldb.patch
-#	epatch "${FILESDIR}"/litecoin-0.10.2.2-fix-litecoin-qt_protocol.patch
 	eautoreconf
 	rm -r src/leveldb
 
