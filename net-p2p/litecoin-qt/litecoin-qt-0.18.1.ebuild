@@ -5,8 +5,6 @@ EAPI=7
 
 DB_VER="4.8"
 
-LANGS="af af_ZA ar be_BY bg bg_BG ca ca@valencia ca_ES cs cy da de el el_GR en en_GB eo es es_AR es_CL es_CO es_DO es_ES es_MX es_UY es_VE et eu_ES et_EE fa fa_IR fi fr fr_CA fr_FR gl he hi_IN hr hu id_ID it it_IT ja ka kk_KZ ko_KR ku_IQ ky la lt lv_LV mk_MK mn ms_MY nb ne nl pam pl pt_BR pt_PT ro ro_RO ru ru_RU sk sl_SI sq sr sr@latin sv ta th_TH tr tr_TR uk ur_PK uz@Cyrl vi vi_VN zh zh_CN zh_HK zh_TW"
-
 inherit autotools db-use eutils gnome2-utils qmake-utils
 
 MyPV="${PV/_/-}"
@@ -20,7 +18,7 @@ SRC_URI="https://github.com/${MyPN}-project/${MyPN}/archive/v${MyPV}.tar.gz -> $
 LICENSE="MIT ISC GPL-3 LGPL-2.1 public-domain || ( CC-BY-SA-3.0 LGPL-2.1 )"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+asm dbus kde knots +qrcode +system-leveldb test upnp +wallet zeromq"
+IUSE="zmq qt5 +asm dbus kde knots +qrcode +system-leveldb test upnp +wallet zeromq"
 
 RDEPEND="
 	dev-libs/boost:=[threads(+)]
@@ -52,6 +50,7 @@ RDEPEND="
 	zmq? ( net-libs/zeromq )
 "
 DEPEND="${RDEPEND}
+	>=dev-libs/boost-1.52.0:=[threads(+)]
 	>=app-shells/bash-4.1
 	dev-libs/libevent
 "
@@ -61,6 +60,7 @@ DOCS="doc/README.md"
 S="${WORKDIR}/${MyP}"
 
 src_prepare() {
+    epatch "${FILESDIR}"/litecoind-0.18.1-memenv_h.patch
 	eautoreconf
 	rm -r src/leveldb
 
@@ -68,24 +68,18 @@ src_prepare() {
 
 	local filt= yeslang= nolang=
 
-	for lan in $LANGS; do
-		if [ ! -e qt/locale/litecoin_$lan.ts ]; then
-			ewarn "Language '$lan' no longer supported. Ebuild needs update."
-		fi
-	done
-
-	for ts in $(ls qt/locale/*.ts)
-	do
-		x="${ts/*litecoin_/}"
-		x="${x/.ts/}"
-		if ! use "linguas_$x"; then
-			nolang="$nolang $x"
-			#rm "$ts"
-			filt="$filt\\|$x"
-		else
-			yeslang="$yeslang $x"
-		fi
-	done
+#	for ts in $(ls qt/locale/*.ts)
+#	do
+#		x="${ts/*litecoin_/}"
+#		x="${x/.ts/}"
+#		if ! use "linguas_$x"; then
+#			nolang="$nolang $x"
+#			#rm "$ts"
+#			filt="$filt\\|$x"
+#		else
+#			yeslang="$yeslang $x"
+#		fi
+#	done
 
 	filt="bitcoin_\\(${filt:2}\\)\\.\(qm\|ts\)"
 	sed "/${filt}/d" -i 'qt/bitcoin_locale.qrc'
