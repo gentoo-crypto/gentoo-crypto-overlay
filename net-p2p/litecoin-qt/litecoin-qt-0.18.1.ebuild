@@ -60,7 +60,9 @@ DOCS="doc/README.md"
 S="${WORKDIR}/${MyP}"
 
 src_prepare() {
-    epatch "${FILESDIR}"/litecoind-0.18.1-memenv_h.patch
+	eapply "${FILESDIR}"/litecoind-0.18.1-memenv_h.patch
+
+	eapply_user
 	eautoreconf
 	rm -r src/leveldb
 
