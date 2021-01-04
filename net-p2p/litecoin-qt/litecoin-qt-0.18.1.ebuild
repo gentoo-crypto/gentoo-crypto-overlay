@@ -61,7 +61,8 @@ S="${WORKDIR}/${MyP}"
 
 src_prepare() {
 	eapply "${FILESDIR}"/litecoind-0.18.1-memenv_h.patch
-
+    eapply "${FILESDIR}"/0.9.0-sys_leveldb.patch
+	eapply "${FILESDIR}"/0.18.1_fix_missing_header.patch
 	eapply_user
 	eautoreconf
 	rm -r src/leveldb
