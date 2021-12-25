@@ -22,7 +22,7 @@ IUSE="zmq qt5 +asm dbus kde knots +qrcode +system-leveldb test upnp +wallet zero
 
 RDEPEND="
 	dev-libs/boost:=[threads(+)]
-	dev-libs/openssl:0[-bindist]
+	dev-libs/openssl[-bindist]
 	dev-libs/protobuf:=
 	qrcode? (
 		media-gfx/qrencode
@@ -63,6 +63,7 @@ src_prepare() {
 	eapply "${FILESDIR}"/litecoind-0.18.1-memenv_h.patch
     eapply "${FILESDIR}"/0.9.0-sys_leveldb.patch
 	eapply "${FILESDIR}"/0.18.1_fix_missing_header.patch
+#	eapply "${FILESDIR}"/litecoin-0.10.2.2-fix-litecoin-qt_protocol.patch
 	eapply_user
 	eautoreconf
 	rm -r src/leveldb
@@ -126,7 +127,8 @@ src_install() {
 
 	if use kde; then
 		insinto /usr/share/kde4/services
-		newins contrib/debian/litecoin-qt.protocol ${PN}.protocol
+		#TODO: Fix. Not found
+		#newins contrib/debian/bitcoin-qt.protocol ${PN}.protocol
 	fi
 }
 
