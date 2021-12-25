@@ -22,7 +22,7 @@ IUSE="zmq qt5 +asm dbus kde knots +qrcode +system-leveldb test upnp +wallet zero
 
 RDEPEND="
 	dev-libs/boost:=[threads(+)]
-	dev-libs/openssl[-bindist]
+	dev-libs/openssl
 	dev-libs/protobuf:=
 	qrcode? (
 		media-gfx/qrencode
